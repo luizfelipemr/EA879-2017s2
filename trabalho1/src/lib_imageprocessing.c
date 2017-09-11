@@ -51,6 +51,47 @@ imagem abrir_imagem(char *nome_do_arquivo) {
 
 }
 
+// Função para aplicar brilho à imagem.
+int void alterar_brilho_imagem(imagem *I, float valor){
+int i, j, k = 0;
+    for (int i=0; i<I->width; i++) {
+    for (int j=0; j<I->height; j++) {
+        idx = i + (j*I->width);
+           
+      I->r[idx] = I->r[idx] * valor;
+      if(I->r[idx] > 255)
+        I->r[idx] = 255;
+      I->g[idx] = I->g[idx] * valor;
+      if(I->g[idx] > 255)
+        I->g[idx] = 255;
+      I->b[idx] = I->b[idx] * valor;
+      if(I->b[idx] > 255)
+I->b[idx] = 255;      
+           }
+      }
+
+
+//Função para calcular valor máximo dos pixels da imagem.
+
+void valor_maximo(imagem *I){
+float valor_maximo, valor_analisado = 0;
+int k = 0;
+  for (int i=0; i<I->width; i++) {
+  for (int j=0; j<I->height; j++) {
+     
+      k = i + (j*I->width);
+     
+      valor_analisado = (I->r[k] + I->g[k] + I->b[k]) / 3.0; //média aritmética das intensidades
+     
+      if(valor_analisado > valor_maximo){
+        valor_maximo = valor_analisado;
+          }
+        }
+    }
+}
+
+
+
 void liberar_imagem(imagem *I) {
   free(I->r);
   free(I->g);
